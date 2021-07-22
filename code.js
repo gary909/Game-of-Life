@@ -3,6 +3,7 @@
 var rows = 24;
 var cols = 24;
 
+var playing = true;
 
 // init
 function initialize(){
