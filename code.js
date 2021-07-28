@@ -3,7 +3,17 @@
 var rows = 24;
 var cols = 24;
 
-var playing = true; // track if game is running
+var playing = false // track if game is running
+
+var grid = new Array(rows);
+var nextGrid = new Array(rows)
+
+function initializeGrids() {
+    for (var i = 0; i < rows; i++) {
+        grid[i] = new Array(cols);
+        nextGrid[i] = new Array(cols);
+    }
+}
 
 // init
 function initialize(){
