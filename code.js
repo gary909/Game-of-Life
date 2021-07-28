@@ -15,9 +15,20 @@ function initializeGrids() {
     }
 }
 
+function resetGrids() {
+    for (var i = 0; i < rows; i++) {
+        for (var j = 0; j < cols; j++){
+            grid[i][j] = 0;
+            nextGrid[i][j] = 0;
+        }
+    }
+}
+
 // init
 function initialize(){
     createTable();
+    initializeGrids();
+    resetGrids();
     setupControlButtons();
 }
 
