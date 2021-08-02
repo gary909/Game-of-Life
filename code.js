@@ -79,6 +79,19 @@ function cellClickHandler(){
     }
 }
 
+function updateView() {
+    for (var i = 0; i < rows; i++) {
+        for (var j = 0; j < cols; j++) {
+            var cell = document.getElementById(i + "_" + j);
+            if (grid[i][j] == 0) {
+                cell.setAttribute("class", "dead");
+            } else {
+                cell.setAttribute("class", "live");
+            }
+        }
+    }
+}
+
 function setupControlButtons() {
     // button to start
     var startButton = document.getElementById("start");
@@ -123,6 +136,10 @@ function computeNextGen() {
             applyRules(i, j);
         }
     }
+    // copy nextGrid to grid, and reset nextGrid
+    copyAndResetGrid();
+    // copy all 1 values to "live" in the table
+    updateView();    
 }
 
 // RULES
