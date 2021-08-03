@@ -1,12 +1,9 @@
-// var rows = window.innerHeight;
-// var cols = window.innerWidth;
 var rows = 24;
 var cols = 24;
-
-var playing = false // track if game is running
+var playing = false;
 
 var grid = new Array(rows);
-var nextGrid = new Array(rows)
+var nextGrid = new Array(rows);
 
 function initializeGrids() {
     for (var i = 0; i < rows; i++) {
@@ -17,54 +14,53 @@ function initializeGrids() {
 
 function resetGrids() {
     for (var i = 0; i < rows; i++) {
-        for (var j = 0; j < cols; j++){
-            grid[i][j] = 0;
-            nextGrid[i][j] = 0;
-        }
-    }
-}
-
-function copyAndResetGrid(){
-    for (var i = 0; i < rows; i++) {
         for (var j = 0; j < cols; j++) {
             grid[i][j] = 0;
             nextGrid[i][j] = 0;
         }
     }
 }
+function copyAndResetGrid() {
+    for (var i = 0; i < rows; i++) {
+        for (var j = 0; j < cols; j++) {
+            grid[i][j] = nextGrid[i][j];
+            nextGrid[i][j] = 0;
+        }
+    }
+}
 
-// init
-function initialize(){
+// initialize
+function initialize() {
     createTable();
     initializeGrids();
     resetGrids();
     setupControlButtons();
 }
 
-// lay out the board
-function createTable(){
+// lay out the grid 
+function createTable() {
     var gridContainer = document.getElementById("gridContainer");
     if (!gridContainer) {
-        //throw error
+        // throw error
         console.error("Problem: no div for the grid table!");
     }
-    var table = document.createElement("table"); // creates element using the 'table' standard
+    var table = document.createElement("table");
 
-    for (var i = 0; i < rows; i++){
-        var tr = document.createElement("tr"); // tr is table row
-        for (var j = 0; j < cols; j++){
-            var cell = document.createElement("td"); // td table data
-            cell.setAttribute("id", i + "_" + j); // each cell gets a unique ID
-            cell.setAttribute("class", "dead"); // set correct CSS class dead/alive
-            cell.onclick = cellClickHandler; // handles the clicks
-            tr.appendChild(cell); // appends child
+    for (var i = 0; i < rows; i++) {
+        var tr = document.createElement("tr");
+        for (var j = 0; j < cols; j++) {
+            var cell = document.createElement("td");
+            cell.setAttribute("id", i + "_" + j);
+            cell.setAttribute("class", "dead");
+            cell.onclick = cellClickHandler;
+            tr.appendChild(cell);
         }
-        table.appendChild(tr); // appends child
+        table.appendChild(tr);
     }
     gridContainer.appendChild(table);
 }
 
-function cellClickHandler(){
+function cellClickHandler() {
     var rowcol = this.id.split("_");
     var row = rowcol[0];
     var col = rowcol[1];
@@ -102,8 +98,7 @@ function setupControlButtons() {
     clearButton.onclick = clearButtonHandler;
 }
 
-// clear the grid
-function clearButtonHandler(){
+function clearButtonHandler() {
     console.log("Clear the game: stop playing, clear the grid");
     playing = false;
     var startButton = document.getElementById("start");
@@ -124,9 +119,8 @@ function startButtonHandler() {
     }
 }
 
-// Run the game
+// run the life game
 function play() {
-    // console.log("Play the game");
     computeNextGen();
 }
 
@@ -139,7 +133,7 @@ function computeNextGen() {
     // copy nextGrid to grid, and reset nextGrid
     copyAndResetGrid();
     // copy all 1 values to "live" in the table
-    updateView();    
+    updateView();
 }
 
 // RULES
@@ -194,5 +188,6 @@ function countNeighbors(row, col) {
 }
 
 
-// Start everything
+// start everything
+
 window.onload = initialize;
