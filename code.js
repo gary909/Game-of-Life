@@ -1,6 +1,8 @@
 var rows = 24;
 var cols = 24;
 var playing = false;
+var timer;
+var reproductionTime = 100;
 
 var grid = new Array(rows);
 var nextGrid = new Array(rows);
@@ -111,17 +113,21 @@ function startButtonHandler() {
         console.log("Pause the game");
         playing = false;
         this.innerHTML = "continue";
+        clearTimeout(timer);
     } else {
         console.log("Continue the game");
         playing = true;
         this.innerHTML = "pause";
-        play();
+        play(); 
     }
 }
 
 // run the life game
 function play() {
     computeNextGen();
+    if (playing) {
+        timer = setTimeout(play, reproductionTime);
+    }
 }
 
 function computeNextGen() {
