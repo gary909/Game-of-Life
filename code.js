@@ -102,9 +102,17 @@ function setupControlButtons() {
 
 function clearButtonHandler() {
     console.log("Clear the game: stop playing, clear the grid");
+
     playing = false;
     var startButton = document.getElementById("start");
     startButton.innerHTML = "start";
+    clearTimeout(timer);
+
+    var cellsList = document.getElementsByClassName("live");
+    for (var i = 0; i < cellsList.length; i++) {
+        cellsList[i].setAttribute("class", "dead");
+    }
+    resetGrids();
 }
 
 // start/pause/continue the game
