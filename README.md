@@ -27,3 +27,11 @@ Rev 2
 Make board elements clickable
 
 ![image showing 2nd code example](rev2.png)
+
+_________________________
+
+Rev 3
+
+Random Button Added.  Board size increased
+
+![image showing 3rd code example](rev3.png)
